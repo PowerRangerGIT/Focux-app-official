@@ -44,10 +44,9 @@ document.getElementById('stayOnTopBtn').addEventListener('click', function() {
     }
     
     // Usar la API de Electron para mantener la ventana siempre visible
-    if (window.electron) {
-        window.electron.setAlwaysOnTop(isAlwaysOnTop);
+    if (window.electronAPI) {
+        window.electronAPI.setAlwaysOnTop(isAlwaysOnTop);
     } else {
-        // Fallback para navegador (no funcionará realmente)
         console.log('Always on top functionality is only available in the desktop app');
     }
 });

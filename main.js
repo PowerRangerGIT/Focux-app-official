@@ -6,7 +6,8 @@ function createWindow() {
         height: 600,
         webPreferences: {
             nodeIntegration: true,
-            contextIsolation: false
+            contextIsolation: true,
+            preload: require('path').join(__dirname, 'preload.js')
         }
     });
 
@@ -28,9 +29,16 @@ app.on('activate', () => {
 });
 
 // Exponer la funcionalidad de "siempre visible" al proceso de renderizado
-ipcMain.handle('setAlwaysOnTop', (event, isAlwaysOnTop) => {
+ipcMain.on('set-always-on-top', (event, value) => {
     const win = BrowserWindow.getFocusedWindow();
     if (win) {
-        win.setAlwaysOnTop(isAlwaysOnTop);
+        win.setAlwaysOnTop(value);
     }
-}); 
+});
+
+// Exponer la API de Electron al proceso de renderizado
+global.electron = {
+    setAlwaysOnTop: (isAlwaysOnTop) => {
+        ipcMain.emit('set-always-on-top', null, isAlwaysOnTop);
+    }
+}; 
