@@ -1,5 +1,5 @@
 # Focux-app-official
-a focuss app for TDA and TDAH persons
+a focus app for TDA and TDAH persons
 
 This app was created to help me stop procrastinating, and I hope it helps you too.
 
